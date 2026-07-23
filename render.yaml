@@ -1,0 +1,27 @@
+# Render Blueprint — deploy the portfolio as a Node web service.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: manoj-portfolio
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      # Set the secrets below in the Render dashboard (Environment tab),
+      # not here. Listing them keeps the blueprint self-documenting.
+      - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: ADMIN_USER_IDS
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
