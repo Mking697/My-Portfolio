@@ -25,7 +25,7 @@ export default async function HomePage() {
   return (
     <>
       <Navbar profile={content.profile} />
-      <main>
+      <main id="main-content">
         <Hero profile={content.profile} />
         <Stats />
         <About

@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { isClerkConfigured } from "@/lib/config";
+import { profile } from "@/lib/profile";
 import Background from "@/components/Background";
 import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
@@ -44,6 +45,27 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#05060a",
+};
+
+// Rich search-result data for the person, built from the static profile
+// (same fallback data the components already import — no DB call needed here).
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: profile.title,
+  email: `mailto:${profile.email}`,
+  telephone: profile.phone,
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: profile.location,
+  },
+  sameAs: [profile.linkedinUrl, profile.github].filter(Boolean),
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -52,6 +74,14 @@ export default function RootLayout({
   const html = (
     <html lang="en" className={spaceGrotesk.variable}>
       <body className="min-h-screen font-sans">
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <Background />
         <ScrollProgress />
         {children}

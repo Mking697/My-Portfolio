@@ -19,7 +19,7 @@ export default function Footer({
 
   return (
     <footer className="border-t border-white/10 px-6 py-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 text-sm text-slate-500 sm:flex-row">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 text-sm text-slate-400 sm:flex-row">
         <p className="text-center sm:text-left">
           <span className="text-gradient font-semibold">{profile.name}</span> —{" "}
           {profile.title}

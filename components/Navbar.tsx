@@ -33,6 +33,21 @@ export default function Navbar({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock background scroll while the mobile panel is open, and let Escape close it.
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
   // Scroll-spy: highlight the nav link for the section in view.
   useEffect(() => {
     const sections = links
@@ -102,7 +117,7 @@ export default function Navbar({
             href={profile.cvUrl}
             target="_blank"
             rel="noreferrer"
-            className="hidden items-center gap-1.5 rounded-full border border-white/15 px-4 py-1.5 text-sm text-slate-200 transition-colors hover:border-accent-cyan hover:text-white sm:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full border border-white/15 px-4 py-1.5 text-sm text-slate-200 transition-all hover:border-accent-cyan hover:text-white active:scale-[0.98] sm:inline-flex"
           >
             <Download className="h-3.5 w-3.5" /> CV
           </a>

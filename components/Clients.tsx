@@ -8,15 +8,6 @@ import {
 } from "@/lib/profile";
 import SectionHeading from "./SectionHeading";
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.06 } },
-};
-const item = {
-  hidden: { opacity: 0, scale: 0.95 },
-  show: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
-};
-
 export default function Clients({
   clients = defaultClients,
   motto = defaultMotto,
@@ -24,6 +15,9 @@ export default function Clients({
   clients?: string[];
   motto?: string;
 }) {
+  // Duplicated so the CSS marquee (translateX 0 → -50%) loops seamlessly.
+  const track = [...clients, ...clients];
+
   return (
     <section id="clients" className="scroll-mt-24 px-6 py-24">
       <div className="mx-auto max-w-6xl">
@@ -44,23 +38,24 @@ export default function Clients({
         />
 
         <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
+          transition={{ duration: 0.5 }}
+          className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
         >
-          {clients.map((client) => (
-            <motion.div
-              key={client}
-              variants={item}
-              className="glass flex min-h-[88px] items-center justify-center p-5 text-center transition-colors hover:border-accent/40"
-            >
-              <span className="text-sm font-semibold text-slate-200">
-                {client}
-              </span>
-            </motion.div>
-          ))}
+          <div className="animate-marquee flex w-max gap-4">
+            {track.map((client, i) => (
+              <div
+                key={`${client}-${i}`}
+                className="glass flex min-h-[88px] w-56 shrink-0 items-center justify-center p-5 text-center transition-colors hover:border-accent/40"
+              >
+                <span className="text-sm font-semibold text-slate-200">
+                  {client}
+                </span>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

@@ -111,7 +111,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div className="flex items-start justify-between gap-2">
           <h3 className="text-lg font-semibold text-white">{project.title}</h3>
           {host && (
-            <span className="mt-1 shrink-0 text-[11px] text-slate-500">
+            <span className="mt-1 shrink-0 text-[11px] text-slate-400">
               {host}
             </span>
           )}

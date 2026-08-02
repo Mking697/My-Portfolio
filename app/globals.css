@@ -58,7 +58,15 @@
 @layer components {
   /* Reusable subtle glass card */
   .glass {
-    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md;
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md transition-shadow duration-300;
+  }
+  .glass:hover {
+    box-shadow: 0 12px 40px -16px rgba(124, 58, 237, 0.35);
+  }
+
+  /* Hidden until keyboard-focused: lets keyboard users jump past the nav */
+  .skip-link {
+    @apply fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white opacity-0 transition-all duration-200 focus:translate-y-0 focus:opacity-100;
   }
 
   /* Gradient text helper */
@@ -102,6 +110,22 @@
   }
   .animate-aurora-2 {
     animation: aurora-2 22s ease-in-out infinite;
+  }
+
+  /* Infinite marquee for the Clients strip */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+  .animate-marquee:hover {
+    animation-play-state: paused;
   }
 
   /* Subtle film grain overlay */

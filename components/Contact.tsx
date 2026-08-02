@@ -152,7 +152,11 @@ export default function Contact({
           className="glass p-6 sm:p-8"
         >
           {status === "success" ? (
-            <div className="flex flex-col items-center gap-3 py-8 text-center">
+            <div
+              role="status"
+              aria-live="polite"
+              className="flex flex-col items-center gap-3 py-8 text-center"
+            >
               <CheckCircle2 className="h-12 w-12 text-emerald-400" />
               <h3 className="text-xl font-semibold text-white">
                 Message sent!
@@ -208,13 +212,15 @@ export default function Contact({
               </div>
 
               {status === "error" && (
-                <p className="text-sm text-red-400">{error}</p>
+                <p role="status" aria-live="polite" className="text-sm text-red-400">
+                  {error}
+                </p>
               )}
 
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-accent to-accent-glow px-6 py-3 text-sm font-semibold text-white shadow-[0_0_40px_-10px_rgba(124,58,237,0.9)] transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-accent to-accent-glow px-6 py-3 text-sm font-semibold text-white shadow-[0_0_40px_-10px_rgba(124,58,237,0.9)] transition-transform hover:scale-[1.01] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
               >
                 {status === "loading" ? (
                   <>

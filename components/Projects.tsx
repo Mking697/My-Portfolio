@@ -85,7 +85,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
         )}
 
         {projects.length === 0 ? (
-          <p className="text-center text-slate-500">
+          <p className="text-center text-slate-400">
             No projects yet. Add some from the{" "}
             <span className="text-accent-cyan">Admin</span> dashboard.
           </p>

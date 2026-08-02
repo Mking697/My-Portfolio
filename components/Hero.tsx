@@ -76,7 +76,7 @@ export default function Hero({
           >
             <a
               href="#projects"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-glow px-7 py-3 text-sm font-semibold text-white shadow-[0_0_40px_-8px_rgba(124,58,237,0.9)] transition-transform hover:scale-[1.03]"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-glow px-7 py-3 text-sm font-semibold text-white shadow-[0_0_40px_-8px_rgba(124,58,237,0.9)] transition-transform hover:scale-[1.03] active:scale-[0.98]"
             >
               View My Work
               <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
@@ -85,7 +85,7 @@ export default function Hero({
               href={profile.cvUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-accent-cyan hover:text-white"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3 text-sm font-semibold text-slate-200 transition-all hover:border-accent-cyan hover:text-white active:scale-[0.98]"
             >
               <Download className="h-4 w-4" /> Download CV
             </a>
